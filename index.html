@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رحلة التطور: الحاسوب ووسائل الاتصال</title>
+<meta name="description" content="لعبة تفاعلية ثلاثية الأبعاد: شاهد كيف تقلص الحاسوب وكيف تطورت وسائل التواصل، واجمع النقاط!">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="رحلة التطور: الحاسوب ووسائل الاتصال">
+<meta property="og:description" content="لعبة تفاعلية ثلاثية الأبعاد: شاهد كيف تقلص الحاسوب وكيف تطورت وسائل التواصل، واجمع النقاط!">
+<meta property="og:url" content="https://informatics-1as4.github.io/evolution/">
+<meta property="og:image" content="https://informatics-1as4.github.io/evolution/og-image.jpg?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap">
+<style>
+:root{--card:#fffffff2;--tx:#14213d;--mut:#4a5568;--bd:#cbd5e1;--pc:#0b7285;--cm:#b45309;--ok:#15803d;--bad:#b91c1c;--btn:#14213d;--btx:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:#0d1930f0;--tx:#eef2f9;--mut:#a9b6cc;--bd:#2b3d63;--pc:#5ad1db;--cm:#f2b04c;--ok:#5ee08a;--bad:#ff8585;--btn:#f2b04c;--btx:#101828}}
+:root[data-theme="dark"]{--card:#0d1930f0;--tx:#eef2f9;--mut:#a9b6cc;--bd:#2b3d63;--pc:#5ad1db;--cm:#f2b04c;--ok:#5ee08a;--bad:#ff8585;--btn:#f2b04c;--btx:#101828}
+html,body{height:100%;margin:0;background:#060d1f;overflow:hidden;font-family:Cairo,Tahoma,"Segoe UI",sans-serif;color:var(--tx)}
+#c{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
+#top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;color:#eef2f9;pointer-events:none}
+#dots{display:flex;gap:4px}
+#dots i{width:20px;height:5px;border-radius:3px;background:#ffffff33}
+#dots i.on{background:#f2b04c}#dots i.cur{background:#fff}
+#sc{font-weight:900;font-size:18px}
+#card{position:fixed;left:0;right:0;bottom:0;max-width:560px;margin:0 auto;padding:16px 16px calc(14px + env(safe-area-inset-bottom,0px));background:var(--card);border-radius:18px 18px 0 0;border-top:3px solid var(--bd);box-sizing:border-box}
+#card.pc{border-top-color:var(--pc)}#card.cm{border-top-color:var(--cm)}
+.tag{font-size:13px;font-weight:700}.pc .tag{color:var(--pc)}.cm .tag{color:var(--cm)}
+h1{font-size:25px;font-weight:900;margin:2px 0 4px;line-height:1.3}
+p{margin:0 0 10px;line-height:1.7;font-size:16px;color:var(--mut)}
+button{font:inherit;font-weight:700;font-size:16px;width:100%;padding:12px;border-radius:12px;border:2px solid var(--bd);background:transparent;color:var(--tx);margin-top:8px;cursor:pointer}
+button.main{background:var(--btn);color:var(--btx);border-color:var(--btn)}
+button.alt{border-color:var(--cm)}button.alt2{border-color:var(--pc);color:var(--pc)}
+button:focus-visible{outline:3px solid var(--pc);outline-offset:2px}
+button.ok{border-color:var(--ok);color:var(--ok)}button.bad{border-color:var(--bad);color:var(--bad)}
+.q{font-size:18px;font-weight:700;color:var(--tx);margin-bottom:4px}
+.fb{font-weight:700;margin:8px 0 0}
+.hint{font-size:13px;color:var(--mut);margin:0 0 4px}
+.bar{height:8px;border-radius:4px;background:var(--bd);margin:2px 0 10px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pc);transition:width .6s}
+#hero{display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(92vw,520px);pointer-events:none}
+.mn #hero{display:block}
+.hex{padding:2px;background:linear-gradient(90deg,#a855f7,#38bdf8);clip-path:polygon(7% 0,93% 0,100% 50%,93% 100%,7% 100%,0 50%)}
+.hex>div{background:#070b24;clip-path:polygon(7% 0,93% 0,100% 50%,93% 100%,7% 100%,0 50%);padding:12px 24px;text-align:center}
+#hero b{display:block;font-size:30px;font-weight:900;color:#e0f2fe;text-shadow:0 0 14px #38bdf8}
+#hero span{font-size:15px;font-weight:700;color:#fcd34d}
+#card.menu{background:linear-gradient(#050a2400,#050a24ec 22%);border:0;border-radius:0;padding-top:24px;color:#fff}
+.hex.mp>div{display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 18px}
+.mp b{display:block;font-size:26px;font-weight:900;line-height:1.2;color:#fff}
+.mp span{font-size:15px;font-weight:700;color:#5ad1db}
+button.nb{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 16px;border-radius:14px;color:#fff;border:2px solid}
+button.nb.p{border-color:#a855f7;background:linear-gradient(90deg,#2a0f5e,#12082e);box-shadow:0 0 16px #a855f7aa,inset 0 0 14px #a855f744}
+button.nb.b{border-color:#38bdf8;background:linear-gradient(90deg,#0b2a66,#08122e);box-shadow:0 0 16px #38bdf8aa,inset 0 0 14px #38bdf844}
+.nb .ic{font-size:30px}.nb .lb{flex:1;text-align:center;font-size:20px;font-weight:700}.nb .ch{font-size:30px}
+.ft{margin:14px 0 0;text-align:center;font-size:14px;font-weight:700;color:#fcd34d;border:2px solid #38bdf8aa;border-radius:20px;padding:8px 10px;background:#070b24}
+#hero{display:block;top:calc(env(safe-area-inset-top,0px) + 46px)}
+.mn #hero{top:calc(env(safe-area-inset-top,0px) + 12px)}
+#hero b{font-size:clamp(20px,6vw,28px)}
+#card.pc,#card.cm{background:linear-gradient(#050a2400,#050a24ec 18%);border:0;border-radius:0;padding-top:22px;color:#fff}
+#card p{color:#c7d2fe}#card .hint{color:#8fa3c9}
+#card .q{color:#fff;font-size:19px}
+button.ob{background:#0b1233;color:#fff;border:2px solid #38bdf8;box-shadow:0 0 12px #38bdf855}
+button.ob.ok{border-color:#5ee08a;color:#5ee08a;box-shadow:0 0 14px #5ee08a88}
+button.ob.bad{border-color:#ff8585;color:#ff8585;box-shadow:0 0 14px #ff858588}
+.bar{background:#1a2250}.bar i{background:linear-gradient(90deg,#a855f7,#38bdf8);box-shadow:0 0 10px #38bdf8}
+#sc{background:#0b1233;border:2px solid #f2b04c;color:#fcd34d;border-radius:20px;padding:2px 12px;font-size:16px}#sc:empty{display:none}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="top"><div id="dots"></div><div id="sc"></div></div>
+<div id="hero"><div class="hex"><div><b id="hb">رحلة التطور</b><span id="hs">من أول حاسوب إلى الذكاء الاصطناعي</span></div></div></div>
+<div id="card"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var PI=Math.PI;
+var C=[
+{t:"إنياك: حاسوب بحجم غرفة",y:"1946",s:15,r:10,c:[24,6,1.5],d:"ملأ مساحة نحو 167 مترًا مربعًا وزنته نحو 30 طنًا، وعمل بآلاف الصمامات المفرغة. انظر إلى الإنسان الصغير بجانبه!",q:"كم كان وزن إنياك تقريبًا؟",o:["30 طنًا","30 كيلوغرامًا","300 غرام"],a:0},
+{t:"الحاسوب المركزي",y:"1964",s:4,r:5,c:[13,4,1.2],d:"تقلص الحاسوب إلى عدة خزائن توضع في غرفة مكيّفة، ويعمل عليه فنيون. استخدمته البنوك والجامعات والشركات الكبرى.",q:"أين كانت توضع الحواسيب الكبيرة في ذلك الوقت؟",o:["في الجيب","في غرف خاصة مكيّفة","على المعصم"],a:1},
+{t:"الحاسوب الشخصي",y:"1981",s:.45,r:2.6,c:[6.5,2.2,.95],d:"صار الحاسوب بحجم صندوق صغير فوق مكتب. دخل البيوت والمكاتب لأول مرة، وأطلقت شركة IBM حاسوبها الشخصي في هذا العام.",q:"ما الذي تغيّر مع الحاسوب الشخصي؟",o:["صار يملأ ملعبًا","اختفى تمامًا","صار يوضع على مكتب في البيت"],a:2},
+{t:"الحاسوب المحمول",y:"التسعينيات",s:.33,r:2.4,c:[5.5,2,.95],d:"طُوي الحاسوب وصار يُحمل في حقيبة ويعمل بالبطارية، فخرج من المكتب إلى المقهى والمطار.",q:"ما ميزة الحاسوب المحمول؟",o:["يحتاج غرفة خاصة","لا يملك شاشة","يعمل ببطارية ويُحمل في حقيبة"],a:2},
+{t:"الهاتف الذكي",y:"2007",s:.15,r:1.8,c:[3.6,1.7,1.2],d:"حاسوب بحجم الكف، أقوى بكثير من إنياك، ويجمع الاتصال والكاميرا والإنترنت في جيبك.",q:"الهاتف الذكي مقارنة بإنياك:",o:["أكبر حجمًا وأضعف","أصغر بكثير وأقوى بكثير","مثله تمامًا"],a:1},
+{t:"الساعة الذكية",y:"2015",s:.04,r:1.8,c:[3.4,1.7,1.2],d:"وصل الحاسوب إلى المعصم. تقيس خطواتك وتستقبل الرسائل، وهي أصغر محطة في رحلتنا.",q:"أين يُلبس أصغر حاسوب في رحلتنا؟",o:["في غرفة كاملة","على الظهر","على المعصم"],a:2}
+];
+var K=[
+{t:"الرسول",y:"منذ آلاف السنين",r:6.5,c:[13,4,1.2],d:"لم تكن هناك هواتف. كان الرسول يركض أو يركب حصانًا ليوصل الخبر من قرية إلى أخرى، وقد يستغرق ذلك أيامًا.",q:"كيف كان يصل الخبر بين المدن قديمًا؟",o:["رسول يركض أو يركب","الإنترنت","البريد الإلكتروني"],a:0},
+{t:"الحمام الزاجل",y:"قديمًا",r:5.5,c:[15,4.5,2.4],d:"دُرّب الحمام على العودة إلى بيته، فكانوا يربطون رسالة صغيرة بقدمه ويطلقونه ليطير فوق المسافات الطويلة.",q:"ماذا كان الحمام الزاجل يحمل؟",o:["أجهزة حاسوب","رسائل صغيرة","أسلاكًا كهربائية"],a:1},
+{t:"الدخان والطبول",y:"منذ آلاف السنين",r:4.5,c:[11,3.5,1.2],d:"كان الناس يشعلون النار ويرفعون الدخان أو يقرعون الطبول لإرسال تحذير أو خبر إلى من يرى أو يسمع من بعيد.",q:"أي وسيلة استخدمها القدماء لنقل خبر من بعيد؟",o:["الهاتف المحمول","البريد الإلكتروني","الدخان والطبول"],a:2},
+{t:"التلغراف",y:"نحو 1837",r:3.2,c:[10,3.5,1.2],d:"أرسل أول رسائل كهربائية عبر الأسلاك بنقرات قصيرة وطويلة تسمى شيفرة مورس.",q:"ما الشيفرة التي استُخدمت مع التلغراف؟",o:["شيفرة مورس","شيفرة قيصر","الرمز الشريطي"],a:0},
+{t:"الهاتف",y:"1876",r:4.8,c:[13,3.8,1.4],d:"يُنسب إلى ألكسندر غراهام بيل أول هاتف نقل الصوت البشري عبر سلك، فتحدث شخصان لأول مرة عن بعد.",q:"من يُنسب إليه اختراع الهاتف عام 1876؟",o:["توماس إديسون","ألكسندر غراهام بيل","غوليلمو ماركوني"],a:1},
+{t:"الراديو والتلفاز",y:"العشرينيات والثلاثينيات",r:3.6,c:[12,3.8,1.5],d:"نقل الراديو الصوت عبر الأمواج في الهواء بلا أسلاك، ثم جاء التلفاز ليضيف الصورة إلى البيوت.",q:"ما الذي ينقله الراديو؟",o:["الورق","الصوت عبر الأمواج","الطعام"],a:1},
+{t:"الإنترنت والويب",y:"1969 و 1991",r:3.2,c:[11,3.5,1.7],d:"بدأ بشبكة أربانت بين جامعات عام 1969، ثم صار الويب متاحًا للجميع بعد 1991 بفضل تيم بيرنرز لي.",q:"من اخترع الشبكة العنكبوتية (الويب)؟",o:["ألكسندر بيل","تيم بيرنرز لي","ألان تورينغ"],a:1}
+];
+var $=function(i){return document.getElementById(i)};
+var R;try{R=new THREE.WebGLRenderer({canvas:$("c"),antialias:true,powerPreference:"high-performance"})}catch(e){$("card").innerHTML="<p>المتصفح لا يدعم الرسم ثلاثي الأبعاد.</p>";return}
+var S=new THREE.Scene();S.background=new THREE.Color(0x060d1f);S.fog=new THREE.Fog(0x060d1f,40,170);
+var cam=new THREE.PerspectiveCamera(50,1,.05,500);
+S.add(new THREE.AmbientLight(0xffffff,.75));
+var dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(5,12,10);S.add(dl);var pl=new THREE.PointLight(0xffffff,1.1,70);S.add(pl);
+var M=function(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.55,metalness:.2},o||{}))};
+function bx(g,w,h,d,c,x,y,z,o){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(c,o));m.position.set(x,y,z);g.add(m);return m}
+function cy(g,a,b,h,c,x,y,z,o,rz){var m=new THREE.Mesh(new THREE.CylinderGeometry(a,b,h,24),M(c,o));m.position.set(x,y,z);if(rz)m.rotation.z=rz;g.add(m);return m}
+function sp(g,r,c,x,y,z,o){var m=new THREE.Mesh(new THREE.SphereGeometry(r,r<.2?8:18,r<.2?6:12),M(c,o));m.position.set(x,y,z);g.add(m);return m}
+function gl(c){return{emissive:c,emissiveIntensity:1}}
+function pr(g,x,z,c){var p=new THREE.Group();p.position.set(x,0,z);bx(p,.5,.7,.28,c,0,1.15,0);bx(p,.12,.6,.12,c,-.32,1.15,0);bx(p,.12,.6,.12,c,.32,1.15,0);sp(p,.17,0xe0b48f,0,1.68,0);
+p.userData.L=[];[-.13,.13].forEach(function(lx){var l=new THREE.Group();l.position.set(lx,.8,0);bx(l,.2,.8,.2,0x2b3a55,0,-.4,0);p.add(l);p.userData.L.push(l)});g.add(p);return p}
+function tbl(g,w){bx(g,w,.05,.7,0x8b5a2b,0,.75,0);[-1,1].forEach(function(a){[-1,1].forEach(function(b){bx(g,.05,.75,.05,0x6b4423,a*(w/2-.05),.375,b*.3)})})}
+function house(g,x){bx(g,1.6,1.2,1.4,0xc9b79c,x,.6,-1.4);cy(g,0,1.3,.9,0x7a2e1f,x,1.65,-1.4)}
+var CB=[
+function(g){var L=[],on=M(0xff5252,gl(0xff2222)),off=M(0x551111);for(var i=0;i<15;i++){var x=-7.35+i*1.05;bx(g,1,2.4,.6,0x4a5a6b,x,1.2,-3);for(var r=0;r<2;r++)for(var c=0;c<3;c++){var q=sp(g,.07,0xff5252,x-.25+c*.25,1.8-r*.35,-2.68);q.material=on;L.push(q)}}
+for(i=0;i<4;i++){bx(g,.6,2.4,1,0x4a5a6b,-8.1,1.2,-2.2+i*1.05);bx(g,.6,2.4,1,0x4a5a6b,8.1,1.2,-2.2+i*1.05)}
+pr(g,2,2,0xd9534f);g.userData.tick=function(t){L.forEach(function(l,i){l.material=Math.sin(t*4+i*1.7)>0?on:off})}},
+function(g){var rg=[];for(var i=0;i<6;i++){var x=-3.2+i*1.15;bx(g,1.1,1.8,.8,0x5b6d86,x,.9,-1);bx(g,.8,.15,.02,0x222,x,1.55,-.59);sp(g,.05,0xff5252,x,1.2,-.58,gl(0xff2222));
+if(i===1||i===3){var r=new THREE.Group();r.position.set(x,1.1,-.6);g.add(r);var m=cy(r,.28,.28,.05,0xdddddd,0,0,0);m.rotation.x=PI/2;bx(r,.5,.05,.06,0x333333,0,0,.04);rg.push(r)}}
+bx(g,1.6,.9,.6,0x8a8f98,0,.45,1.4);bx(g,1.4,.04,.4,0x333333,0,.92,1.4);pr(g,1.5,1.5,0x3f7fbf);
+g.userData.tick=function(t){rg.forEach(function(r){r.rotation.z=t*2})}},
+function(g){tbl(g,1.4);bx(g,.5,.12,.4,0xd8d2c0,0,.835,0);bx(g,.38,.3,.36,0xd8d2c0,0,1.05,0);bx(g,.3,.22,.01,0x39e0a0,0,1.06,.185,gl(0x1fae7a));bx(g,.45,.03,.17,0xbfb8a4,0,.79,.45);pr(g,1.3,0,0x3f7fbf)},
+function(g){tbl(g,1.2);bx(g,.33,.02,.23,0xb0b6bf,0,.785,0);var sg=new THREE.Group();sg.position.set(0,.795,-.11);sg.rotation.x=-.2;g.add(sg);bx(sg,.33,.22,.01,0xb0b6bf,0,.11,0);bx(sg,.3,.19,.005,0x2a7de1,0,.11,.008,gl(0x1b5fb0));pr(g,1.1,0,0xd9534f)},
+function(g){var p=new THREE.Group();bx(p,.07,.15,.01,0x151515,0,0,0);bx(p,.062,.135,.002,0x2a7de1,0,0,.006,gl(0x1b5fb0));p.position.set(0,1.3,.2);g.add(p);pr(g,-.7,0,0x3f7fbf);
+g.userData.tick=function(t){p.position.y=1.3+Math.sin(t*1.6)*.02;p.rotation.y=Math.sin(t)*.4}},
+function(g){var p=new THREE.Group();bx(p,.04,.045,.012,0x151515,0,0,.022);bx(p,.034,.036,.002,0x2a7de1,0,0,.029,gl(0x1b5fb0));var r=new THREE.Mesh(new THREE.TorusGeometry(.022,.007,8,16),M(0x333333));r.rotation.x=PI/2;p.add(r);p.position.set(0,1.3,.2);g.add(p);pr(g,-.7,0,0xd9534f);
+g.userData.tick=function(t){p.position.y=1.3+Math.sin(t*1.6)*.02;p.rotation.y=Math.sin(t)*.5}}
+];
+var KB=[
+function(g){bx(g,11,.03,1.4,0x8a7650,0,.02,0);house(g,-5.5);house(g,5.5);var p=pr(g,0,0,0xd9534f);bx(p,.08,.08,.4,0xf5e6b3,.4,1.2,.1);
+g.userData.tick=function(t){var v=Math.cos(t*.8);p.position.x=Math.sin(t*.8)*4;p.rotation.y=v>0?PI/2:-PI/2;p.userData.L[0].rotation.x=Math.sin(t*8)*.7;p.userData.L[1].rotation.x=-Math.sin(t*8)*.7}},
+function(g){[-4,4].forEach(function(x){cy(g,.5,.65,3.2,0x9a8f7a,x,1.6,0);cy(g,0,.8,.8,0x7a2e1f,x,3.6,0);pr(g,x*.8,1.2,x>0?0xd9534f:0x3f7fbf)});
+var b=new THREE.Group();g.add(b);sp(b,.22,0xdddddd,0,0,0).scale.set(1.5,1,1);sp(b,.12,0xcccccc,.3,.1,0);bx(b,.05,.05,.15,0xf5e6b3,0,-.2,0);
+var wl=new THREE.Group(),wr=new THREE.Group();wl.position.z=.12;wr.position.z=-.12;b.add(wl,wr);bx(wl,.3,.03,.4,0xbbbbbb,0,0,.2);bx(wr,.3,.03,.4,0xbbbbbb,0,0,-.2);
+g.userData.tick=function(t){var v=Math.cos(t*.7);b.position.set(Math.sin(t*.7)*4,3.2+Math.sin(t*3)*.15,0);b.rotation.y=v>0?0:PI;wl.rotation.x=Math.sin(t*14)*.6;wr.rotation.x=-Math.sin(t*14)*.6}},
+function(g){cy(g,0,.55,1.2,0xff6b00,-1.6,.8,0,gl(0xff4400));for(var i=0;i<3;i++)cy(g,.1,.1,1.3,0x5c3d1e,-1.6+(i-1)*.3,.15,0,0,PI/2);
+cy(g,.7,.6,1,0x8b4513,1.6,.7,0);cy(g,.72,.72,.06,0xf5deb3,1.6,1.22,0);pr(g,2.7,.3,0x3f7fbf);var P=[];for(var k=0;k<6;k++)P.push(sp(g,.4,0xb8c0cc,-1.6,2,0,{transparent:true,opacity:.6}));
+g.userData.tick=function(t){P.forEach(function(s,k){var u=(t*.4+k/6)%1;s.position.y=1.3+u*2.6;s.position.x=-1.6+Math.sin(u*6+k)*.3;s.scale.setScalar(.4+u);s.material.opacity=.6*(1-u)})}},
+function(g){bx(g,2.6,.25,1.6,0x5c3d1e,0,.12,0);bx(g,.9,.7,.7,0x3a2a1a,-.8,.6,-.3);bx(g,1.2,.1,.3,0xc9a227,.4,.5,.4);bx(g,.2,.35,.2,0xc9a227,.9,.3,.4);
+cy(g,.06,.06,2.6,0x3a2a1a,1,1.5,-.5);bx(g,1.4,.08,.08,0x3a2a1a,1,2.6,-.5);var l=sp(g,.14,0xffe066,-.8,1.1,-.3,gl(0xffcc00));
+g.userData.tick=function(t){l.material.emissiveIntensity=Math.sin(t*9)>.3?1.6:.1}},
+function(g){pr(g,-3.4,0,0x3f7fbf);pr(g,3.4,0,0xd9534f);bx(g,.12,.3,.1,0x161616,-3.05,1.7,0);bx(g,.12,.3,.1,0x161616,3.05,1.7,0);cy(g,.015,.015,6.1,0x222222,0,1.7,0,0,PI/2);var s=sp(g,.1,0xffe066,0,1.7,0,gl(0xffcc00));
+g.userData.tick=function(t){s.position.x=((t*.6)%1)*6.1-3.05}},
+function(g){bx(g,5,.1,1.2,0x8b5a2b,0,.75,0);[-2.3,2.3].forEach(function(x){bx(g,.1,.75,.1,0x6b4423,x,.375,0)});
+bx(g,1.1,.65,.4,0x8b4513,-1.4,1.13,0);var sk=cy(g,.22,.22,.03,0x222222,-1.55,1.13,.21);sk.rotation.x=PI/2;sp(g,.05,0xf5deb3,-1.0,1.3,.21);
+bx(g,1.4,1,.9,0x4a3a2a,1.2,1.3,0);var sc=bx(g,1,.7,.05,0x9fd8ff,1.2,1.32,.46,gl(0x9fd8ff));cy(g,.02,.02,1,0x999999,1,2.1,0,0,.5);cy(g,.02,.02,1,0x999999,1.4,2.1,0,0,-.5);pr(g,0,1.8,0x3f7fbf);
+var W=[];for(var i=0;i<3;i++){var w=new THREE.Mesh(new THREE.TorusGeometry(.6,.02,6,32),M(0xffffff,{transparent:true}));w.position.set(1.2,2.6,0);g.add(w);W.push(w)}
+g.userData.tick=function(t){sc.material.emissiveIntensity=.5+.5*Math.sin(t*20);W.forEach(function(w,i){var u=(t*.5+i/3)%1;w.scale.setScalar(.5+u*3);w.material.opacity=1-u})}},
+function(g){sp(g,1.3,0x10305a,0,1.7,0);var w=sp(g,1.33,0x5ad1db,0,1.7,0,{wireframe:true});for(var i=0;i<14;i++){var a=i*2.4,b=Math.acos(1-2*((i+.5)/14));sp(w,.09,0xffd166,1.34*Math.sin(b)*Math.cos(a),1.34*Math.cos(b),1.34*Math.sin(b)*Math.sin(a),gl(0xffaa00))}
+var o=new THREE.Mesh(new THREE.TorusGeometry(2.2,.02,6,64),M(0xffffff));o.position.y=1.7;o.rotation.x=PI/2.4;g.add(o);var sat=sp(g,.16,0xf2b04c,0,0,0,gl(0xf2b04c));g.add(sat);
+g.userData.tick=function(t){w.rotation.y=t*.3;sat.position.set(Math.cos(t)*2.2,1.7+Math.sin(t)*2.2*Math.sin(PI/2.4),-Math.sin(t)*2.2*Math.cos(PI/2.4))}}
+];
+function HB0(g){var it=[];sp(g,1.3,0x0b2a66,0,1.7,0,{emissive:0x0a1a40,emissiveIntensity:1});var w=sp(g,1.33,0x38bdf8,0,1.7,0,{wireframe:true});sp(g,1.5,0x38bdf8,0,1.7,0,{transparent:true,opacity:.14,side:THREE.BackSide});
+for(var i=0;i<18;i++){var a=i*2.4,b=Math.acos(1-2*((i+.5)/18));sp(w,.07,0xffd166,1.34*Math.sin(b)*Math.cos(a),1.34*Math.cos(b),1.34*Math.sin(b)*Math.sin(a),gl(0xffaa00))}
+[[2.5,0xa855f7,.5],[3.1,0x38bdf8,-.35]].forEach(function(q){var r=new THREE.Mesh(new THREE.TorusGeometry(q[0],.03,8,80),M(q[1],gl(q[1])));r.position.y=1.7;r.rotation.x=PI/2+q[2];g.add(r)});
+var F=[function(o){bx(o,.7,.1,.5,0xd8d2c0,0,-.2,0);bx(o,.55,.45,.45,0xd8d2c0,0,.1,0);bx(o,.42,.32,.02,0x39e0a0,0,.1,.23,gl(0x1fae7a))},
+function(o){bx(o,.8,.04,.55,0xb0b6bf,0,-.1,0);var s=bx(o,.8,.55,.03,0x2a7de1,0,.15,-.27,gl(0x1b5fb0));s.rotation.x=-.25},
+function(o){bx(o,.35,.65,.04,0x151515,0,0,0);bx(o,.3,.58,.01,0x7c3aed,0,0,.025,gl(0x7c3aed))},
+function(o){bx(o,.3,.3,.08,0x151515,0,0,0);bx(o,.25,.25,.01,0x2a7de1,0,0,.045,gl(0x1b5fb0));o.add(new THREE.Mesh(new THREE.TorusGeometry(.2,.05,6,16),M(0x222222)))},
+function(o){bx(o,.8,.6,.5,0x7a4a2a,0,0,0);bx(o,.58,.42,.02,0x9fd8ff,0,0,.26,gl(0x9fd8ff));cy(o,.01,.01,.5,0x999999,.1,.5,0,0,.4)},
+function(o){bx(o,.7,.42,.28,0xb86b2b,0,0,0);bx(o,.28,.26,.01,0x222222,-.12,0,.15);sp(o,.05,0xf5deb3,.2,.05,.15)},
+function(o){bx(o,.3,.3,.3,0xc9a227,0,0,0);bx(o,.7,.02,.3,0x2a4aa0,.6,0,0,gl(0x1b3a80));bx(o,.7,.02,.3,0x2a4aa0,-.6,0,0,gl(0x1b3a80))},
+function(o){sp(o,.16,0xffffff,0,0,0).scale.set(1.5,1,1);sp(o,.09,0xf0f0f0,.24,.08,0);bx(o,.45,.03,.2,0xffffff,0,.1,.2);bx(o,.45,.03,.2,0xffffff,0,.1,-.2);bx(o,.12,.08,.02,0xf5e6b3,.3,-.05,0)}];
+F.forEach(function(f,i){var o=new THREE.Group();f(o);o.scale.setScalar(1.1);g.add(o);it.push([o,i%2?3.1:2.6,i%2?-.3:.3,i*.785,i%2?-.35:.5])});
+g.userData.tick=function(t){w.rotation.y=t*.3;it.forEach(function(q,i){var a=t*q[2]+q[3];q[0].position.set(Math.cos(a)*q[1],1.7+Math.sin(a)*q[1]*Math.sin(q[4]),Math.sin(a)*q[1]*Math.cos(q[4]));q[0].rotation.y=t*.9+i})}}
+var Hm=[{t:"",y:"",r:3.6,c:[13,3.2,1.5]}];
+var X=45,list,idx,score=0,ph="menu",sel=-1,port=false,PR=1.5,lt=0,fc=0,ft=0;
+function build(L,B,col){L.forEach(function(e,i){var s=new THREE.Group();s.position.x=i*X;s.visible=false;S.add(s);e.s0=s;e.k=col;
+cy(s,e.r,e.r+.2,.3,0x16233f,0,.15,0);var rg=new THREE.Mesh(new THREE.TorusGeometry(e.r+.1,Math.max(.02,e.r*.012),8,64),M(col,gl(col)));rg.rotation.x=PI/2;rg.position.y=.32;s.add(rg);
+cy(s,e.r*.78,e.r*.8,.06,0x22376a,0,.33,0);var r2=new THREE.Mesh(new THREE.TorusGeometry(e.r*.8,Math.max(.015,e.r*.008),8,64),M(0xa855f7,gl(0xa855f7)));r2.rotation.x=PI/2;r2.position.y=.37;s.add(r2);var bh=Math.max(4,e.r*1.1);cy(s,e.r*.7,e.r*.9,bh,col,0,bh/2+.3,0,{transparent:true,opacity:.05,depthWrite:false,emissive:col,emissiveIntensity:.6});var sgm=new THREE.BufferGeometry(),sps=[];for(var j=0;j<70;j++){var aa=Math.random()*6.28,rr=Math.random()*e.r;sps.push(Math.cos(aa)*rr,.5+Math.random()*bh,Math.sin(aa)*rr)}sgm.setAttribute("position",new THREE.Float32BufferAttribute(sps,3));s.add(new THREE.Points(sgm,new THREE.PointsMaterial({color:col,size:Math.max(.07,e.r*.025)})));
+var g=new THREE.Group();g.position.y=.36;s.add(g);B[i](g);e.g=g})}
+build(C,CB,0x5ad1db);build(K,KB,0xf2b04c);build(Hm,[HB0],0xa855f7);
+function setList(l){C.concat(K,Hm).forEach(function(e){e.s0.visible=false});l.forEach(function(e){e.s0.visible=true});list=l}
+var gr=new THREE.GridHelper(700,350,0x1d2d52,0x101c38);gr.position.set(120,0,0);S.add(gr);
+var sg=new THREE.BufferGeometry(),pos=[];for(var i=0;i<900;i++)pos.push(-90+Math.random()*420,Math.random()*60,-70+Math.random()*50);
+sg.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));S.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.25})));
+function size(){var w=innerWidth,h=innerHeight;R.setPixelRatio(Math.min(devicePixelRatio||1,PR));R.setSize(w,h,false);cam.aspect=w/h;port=w/h<.9;cam.updateProjectionMatrix()}
+addEventListener("resize",size);size();
+setList(Hm);idx=0;cam.position.set(0,3.2,13);
+var drag=false,lx=0;
+$("c").addEventListener("pointerdown",function(e){drag=true;lx=e.clientX});
+addEventListener("pointermove",function(e){if(drag){list[idx].g.rotation.y+=(e.clientX-lx)*.01;lx=e.clientX}});
+addEventListener("pointerup",function(){drag=false});
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function loop(ms){var t=ms/1000,dt=Math.min(.05,t-lt),k=1-Math.exp(-dt*4.5),e=list[idx],f=port?1.3:1;lt=t;fc++;if(t-ft>2){if(t-ft<3.5&&fc/(t-ft)<40&&PR>1){PR=Math.max(1,PR-.25);size()}fc=0;ft=t}pl.position.set(cam.position.x,7,cam.position.z*.6);pl.color.setHex(e.k);
+list.forEach(function(q,i){var near=Math.abs(i-idx)<=1;q.s0.visible=near;if(!near)return;var tk=q.g.userData.tick;if(!(drag&&i===idx)&&!reduce)q.g.rotation.y+=dt*.18;if(tk&&!reduce)tk(t)});
+cam.position.x+=(idx*X-cam.position.x)*k;cam.position.y+=(e.c[1]*(port?1.1:1)-cam.position.y)*k;cam.position.z+=(e.c[0]*f-cam.position.z)*k;
+cam.lookAt(cam.position.x,e.c[2]-(port?e.c[0]*.1:0),0);R.render(S,cam);requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+function ui(){var e=list[idx],c=$("card"),h="",n=list.length;c.className=ph==="menu"?"menu":(e.k===0xf2b04c?"cm":"pc");document.body.className=ph==="menu"?"mn":"";
+var dots="";if(ph!=="menu")list.forEach(function(_,i){dots+='<i class="'+(i<idx||ph==="end"?"on":i===idx?"cur":"")+'"></i>'});$("dots").innerHTML=dots;$("sc").textContent=ph==="menu"?"":"النقاط: "+score;
+var isC=list===C;var hb=$("hb"),hs=$("hs");if(ph==="menu"){hb.textContent="رحلة التطور";hs.textContent="من أول حاسوب إلى الذكاء الاصطناعي"}else if(ph==="end"){hb.textContent="انتهت الرحلة";hs.textContent="نتيجتك "+score+" من "+n*10}else{hb.textContent=e.t;hs.textContent=(isC?"الحاسوب":"وسائل الاتصال")+" · "+e.y+" · محطة "+(idx+1)+" من "+n}
+if(ph==="menu"){h='<div class="hex mp"><div><span style="font-size:34px">🚀</span><div><b>رحلة التطور</b><span>اختر ما تريد أن تكتشفه:</span></div></div></div><button class="nb p" data-a="go" data-i="0"><span class="ic">🖥️</span><span class="lb">تطور الحاسوب</span><span class="ch">‹</span></button><button class="nb b" data-a="go" data-i="1"><span class="ic">📡</span><span class="lb">تطور وسائل التواصل</span><span class="ch">‹</span></button><div class="ft">★ اكتشف الماضي .. لتفهم الحاضر وتبني المستقبل ★</div>'}
+else if(ph==="end"){var f=score>=n*7?"أحسنت! أنت خبير في هذه الرحلة.":score>=n*4?"نتيجة جيدة. أعد الرحلة لتجمع كل النقاط.":"بداية جيدة. أعد الرحلة وستتعلم أكثر.";
+h='<h1>🏆 '+score+' / '+n*10+'</h1><p>'+(isC?"رأيت الحاسوب يتقلص من غرفة كاملة إلى ساعة في المعصم. ":"رأيت كيف انتقل الخبر من رسول يركض إلى شبكة تغطي العالم. ")+f+'</p><button class="nb p" data-a="go" data-i="'+(isC?0:1)+'"><span class="ic">🔄</span><span class="lb">أعد هذه الرحلة</span><span class="ch">‹</span></button><button class="nb b" data-a="menu"><span class="ic">🧭</span><span class="lb">اختر رحلة أخرى</span><span class="ch">‹</span></button>'}
+else if(ph==="info"){var bar="";if(isC){var p=Math.max(4,Math.round((Math.log10(e.s)+1.5)/(Math.log10(15)+1.5)*100));bar='<p class="hint">الحجم النسبي (مقياس تقريبي)</p><div class="bar"><i style="width:'+p+'%"></i></div>'}
+h='<p>'+e.d+'</p>'+bar+'<button class="nb '+(isC?"p":"b")+'" data-a="quiz"><span class="ic">🎯</span><span class="lb">اختبر معلوماتك</span><span class="ch">‹</span></button>'}
+else{h='<div class="q">'+e.q+'</div>';
+e.o.forEach(function(o,i){var k="";if(sel>=0){if(i===e.a)k="ok";else if(i===sel)k="bad"}h+='<button class="ob '+k+'" data-a="ans" data-i="'+i+'"'+(sel>=0?" disabled":"")+'>'+o+'</button>'});
+if(sel>=0)h+='<p class="fb" style="color:'+(sel===e.a?"#5ee08a":"#ff8585")+'">'+(sel===e.a?"إجابة صحيحة! +10 نقاط":"الإجابة الصحيحة: "+e.o[e.a])+'</p><button class="nb '+(isC?"p":"b")+'" data-a="next"><span class="lb">'+(idx===n-1?"عرض النتيجة":"المحطة التالية")+'</span><span class="ch">‹</span></button>'}
+c.innerHTML=h}
+$("card").addEventListener("click",function(ev){var b=ev.target.closest("button");if(!b||b.disabled)return;var a=b.getAttribute("data-a");
+if(a==="go"){setList(+b.getAttribute("data-i")?K:C);idx=0;score=0;ph="info";sel=-1;cam.position.x=-60}
+else if(a==="quiz"){ph="quiz";sel=-1}
+else if(a==="ans"){sel=+b.getAttribute("data-i");if(sel===list[idx].a)score+=10}
+else if(a==="next"){if(idx===list.length-1)ph="end";else{idx++;ph="info";sel=-1}}
+else if(a==="menu"){setList(Hm);idx=0;ph="menu";cam.position.x=-60}
+ui()});
+ui();
+})();
+</script>
+</body>
+</html>
